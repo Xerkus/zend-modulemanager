@@ -14,4 +14,4 @@ architecture for PHP applcations.
 
 
 - File issues at https://github.com/zendframework/zend-modulemanager/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-modulemanager
+- Documentation is at https://docs.zendframework.com/zend-modulemanager/
