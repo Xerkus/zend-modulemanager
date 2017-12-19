@@ -141,7 +141,7 @@ class ModuleManagerTest extends TestCase
     public function testLoadingModuleFromAnotherModuleDoesNotInfiniteLoop()
     {
         $configListener = $this->defaultListeners->getConfigListener();
-        $moduleManager  = new ModuleManager(['LoadBarModule', 'LoadFooModule'], $this->events);
+        $moduleManager  = new ModuleManager(['LoadFooModule', 'LoadBarModule'], $this->events);
         $this->defaultListeners->attach($this->events);
         $moduleManager->loadModules();
 

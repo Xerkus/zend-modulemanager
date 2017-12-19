@@ -361,12 +361,12 @@ class ConfigListenerTest extends AbstractListenerTestCase
 
         $moduleManager = $this->moduleManager;
         $events        = $moduleManager->getEventManager();
-        $this->assertEquals(2, count($this->getEventsFromEventManager($events)));
+        $this->assertEquals(3, count($this->getEventsFromEventManager($events)));
 
         $configListener->attach($events);
-        $this->assertEquals(4, count($this->getEventsFromEventManager($events)));
+        $this->assertEquals(5, count($this->getEventsFromEventManager($events)));
 
         $configListener->detach($events);
-        $this->assertEquals(2, count($this->getEventsFromEventManager($events)));
+        $this->assertEquals(3, count($this->getEventsFromEventManager($events)));
     }
 }

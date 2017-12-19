@@ -40,18 +40,23 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
 
         $events = $this->getEventsFromEventManager($moduleManager->getEventManager());
         $expectedEvents = [
+            'loadModules.init' => [
+                'Closure', // for 'Zend\ModuleManager\ModuleManager
+            ],
             'loadModules' => [
                 'config-pre' => 'Zend\ModuleManager\Listener\ConfigListener',
                 'config-post' => 'Zend\ModuleManager\Listener\ConfigListener',
                 'Zend\ModuleManager\Listener\LocatorRegistrationListener',
-                'Zend\ModuleManager\ModuleManager',
+                'Closure', // for 'Zend\ModuleManager\ModuleManager
             ],
             'loadModule.resolve' => [
                 'Zend\ModuleManager\Listener\ModuleResolverListener',
             ],
+            'loadModule.init' => [
+                'Zend\ModuleManager\Listener\InitTrigger',
+            ],
             'loadModule' => [
                 'Zend\ModuleManager\Listener\ModuleDependencyCheckerListener',
-                'Zend\ModuleManager\Listener\InitTrigger',
                 'Zend\ModuleManager\Listener\OnBootstrapListener',
                 'Zend\ModuleManager\Listener\ConfigListener',
                 'Zend\ModuleManager\Listener\LocatorRegistrationListener',
@@ -79,12 +84,12 @@ class DefaultListenerAggregateTest extends AbstractListenerTestCase
         $moduleManager     = new ModuleManager(['ListenerTestModule']);
         $events            = $moduleManager->getEventManager();
 
-        $this->assertEquals(1, count($this->getEventsFromEventManager($events)));
+        $this->assertEquals(2, count($this->getEventsFromEventManager($events)));
 
         $listenerAggregate->attach($events);
-        $this->assertEquals(4, count($this->getEventsFromEventManager($events)));
+        $this->assertEquals(6, count($this->getEventsFromEventManager($events)));
 
         $listenerAggregate->detach($events);
-        $this->assertEquals(1, count($this->getEventsFromEventManager($events)));
+        $this->assertEquals(2, count($this->getEventsFromEventManager($events)));
     }
 }

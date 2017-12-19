@@ -51,7 +51,7 @@ class DefaultListenerAggregate extends AbstractListener implements
             );
         }
 
-        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new InitTrigger($options));
+        $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE_INIT, new InitTrigger($options));
         $this->listeners[] = $events->attach(ModuleEvent::EVENT_LOAD_MODULE, new OnBootstrapListener($options));
 
         $locatorRegistrationListener->attach($events);
